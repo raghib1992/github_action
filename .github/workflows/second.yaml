@@ -12,7 +12,8 @@ jobs:
           pwd
           ls -la
     - name: checkout git repo
-      uses: action/checkout raghib1992/sonar-scanning-examples@raghib
+      uses: raghib1992/github_action@v1
+
     - name: Files List after checkout
       run: |
           pwd
