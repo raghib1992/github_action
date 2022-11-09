@@ -5,7 +5,7 @@ on: push
 jobs:
   job1:
     name: first job
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
     steps:
     - name: step one
       uses: actions/checkout@v2
@@ -19,3 +19,40 @@ jobs:
       uses: actions/checkput@v2
     - name: step two
       run: "Get-ChildItem Env: | Sort-Object Name"
+  run-github-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Default Env Variable
+        run: |
+            echo $GITHUB_SHA
+            echo $GITHUB_REPOSITORY
+            echo $GITHUB_WORKSPACE
+            echo "${{ github.token }}"
+            
+      - name: List Files
+        run: |
+            pwd
+            ls -la
+      - name: Checkout the repo
+        uses: actions/checkout@v1
+      
+      - name: List Files
+        run: |
+            pwd
+            ls -la
+      - name: Checkout Simple JS Action
+        id: greet
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: Raghib
+      - name: Log greeting time
+        run: echo "${{ steps.greet.outputs.time }}"
+  run-window-command:
+    runs-on: windows-latest
+    needs: ["run-shell-command"] # depends on the mention job
+    steps:
+      - name: Directory powershell
+        run: Get-Location
+      - name: Directory Bash
+        run: pwd
+        shell: bash
