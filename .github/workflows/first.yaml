@@ -13,11 +13,11 @@ jobs:
         run: |
             node -v
             npm -v
-  #     - name: Python Commands
-  #       run: |
-  #           import platform
-  #           print(platform.processor())
-  #       shell: python
+      - name: Python Commands
+        run: |
+            import platform
+            print(platform.processor())
+        shell: python
   # run-window-command:
   #   runs-on: windows-latest
   #   needs: ["run-shell-command"] # depends on the mention job

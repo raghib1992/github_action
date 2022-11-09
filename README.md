@@ -1,9 +1,16 @@
 # Github Action
 You can write individual tasks called actions and combine them to create a customworkflow
 # Events
+Run workflows when these events happen
 push
 pull request
 issue (created, closed,..)
+schedule (every 6pm)
+external events
+
+# VM (linux, window, macos) 
+bootup to run job
+
 Events --> Workflow --> Job --> Step --> Action/CMD
 Virtual Environment --> Runners --> Github hosted runner 
                                 --> Self hosted runner
@@ -22,5 +29,8 @@ Github profile --> Setting --> Notification --> System --> Actions
 setting --> secret --> New Secret
 ```
 Name ACTIONS_RUNNER_DEBUG
-secret true
+value true
+
+Name ACTIONS_STEP_DEBUG
+value true
 ```
