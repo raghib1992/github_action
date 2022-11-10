@@ -1,6 +1,9 @@
 name: second workflow
 
-on: push
+on:
+  push:
+  pull_request:
+    types: [closed , reopened, opened, assigned ]
 
 jobs:
   Sonar-Analysis:

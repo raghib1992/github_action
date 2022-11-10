@@ -1,0 +1,17 @@
+name: Schedule workflow
+
+on:
+  schedule:
+    - cron: "* * * * *"
+  push:
+  # pull_request:
+  #   types: [closed, assigned, opened, reopened]
+
+
+jobs:
+  shedule-job:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: test
+      run: echo "Hello World"
