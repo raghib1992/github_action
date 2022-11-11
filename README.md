@@ -34,3 +34,9 @@ value true
 Name ACTIONS_STEP_DEBUG
 value true
 ```
+
+### ENcrypt file using gpg
+gpg --symmetric --cipher-algo AES256 secret.txt
+
+### Decrypt the file using gpg
+gpg --quiet --batch --yes --decrypt --passphrase="$PASSPHRASE" --output $HOME/secret.txt secret.txt.gpg
