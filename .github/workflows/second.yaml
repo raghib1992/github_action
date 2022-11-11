@@ -2,6 +2,17 @@ name: second workflow
 
 on:
   push:
+    # branches:
+    #   - master
+    #   - 'feature/*' # match feature/featA doesn't match feature/feat/A
+    #   - 'feature/**' # match feature/feat/B
+    #   - '!bugs/buga'
+    branches-ignore:
+      - master
+    tags:
+      - v1.*
+    paths:
+      - '**.js'
   pull_request:
     types: [closed , reopened, opened, assigned ]
 

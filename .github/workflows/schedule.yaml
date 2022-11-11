@@ -1,9 +1,20 @@
 name: Schedule workflow
 
 on:
-  schedule:
-    - cron: "* * * * *"
   push:
+    branches-ignore:
+      - "master"
+  # send api pull_request_review
+  # url: https://api.github.com/repos/<username>/<reponame>/dispatches
+  # Body:
+  # {
+  #   "event_type": "build"
+  # }
+  # repository_dispatch:
+  #   types: [build]
+  # schedule:
+  #   - cron: "* * * * *"
+  # push:
   # pull_request:
   #   types: [closed, assigned, opened, reopened]
 
