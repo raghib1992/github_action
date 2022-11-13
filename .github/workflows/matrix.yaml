@@ -3,6 +3,7 @@ on: push
 
 jobs:
   node-version:
+    if: ${{ github.event_name = 'pull_request'}}
     strategy:
       fail-fast: true
       matrix:
