@@ -11,5 +11,6 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+          cache-dependency-path: subdir/package-lock.json
       - name: Logs node-version After
         run: node -v
