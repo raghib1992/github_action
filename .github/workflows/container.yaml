@@ -19,6 +19,15 @@ jobs:
         with:
           entrypoint: /usr/local/bin/node
           args: -v
+
+      - uses: actions/checkout@v1
+      - name: Make a script executable
+        run: chmod +x script.sh
+      - name: Run A script 
+        uses: docker://node:16
+        with:
+          entrypoint: ./script.sh
+          args: "Some Script"
   node-docker:
     services:
       app:
