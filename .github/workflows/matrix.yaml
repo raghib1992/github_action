@@ -9,8 +9,8 @@ jobs:
         run: node -v
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-          cache: 'npm'
-          cache-dependency-path: subdir/package-lock.json
+          node-version: 6
+          # cache: 'npm'
+          # cache-dependency-path: subdir/package-lock.json
       - name: Logs node-version After
         run: node -v
