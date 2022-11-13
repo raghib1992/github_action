@@ -2,6 +2,23 @@ name: Container
 on: push
 
 jobs:
+  docker-step:
+    runs-on: ubuntu-latest
+    container:
+      image: node:14
+    steps:
+      - name: node executable
+        run: type -a node
+      - name: Step with docker 
+        uses: docker://node:16
+        with:
+          entrypoint: /bin/echo
+          args: "Hello World"
+      - name: Log Node version 
+        uses: docker://node:16
+        with:
+          entrypoint: /usr/local/bin/node
+          args: -v
   node-docker:
     services:
       app:
