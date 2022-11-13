@@ -7,8 +7,8 @@ jobs:
     container:
       image: node:14
     steps:
-      - name: node executable
-        run: type -a node
+      # - name: node executable
+      #   run: type -a node
       - name: Step with docker 
         uses: docker://node:16
         with:
