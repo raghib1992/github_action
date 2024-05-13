@@ -20,6 +20,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Cache dependencies
         uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
@@ -39,6 +41,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Cache dependencies
         uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
         with:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
@@ -48,7 +52,7 @@ jobs:
         run: npm run build
       - name: Publisg JS files
         id: publish_id
-      - run: find dist/assets/*.js -type f -execdir echo 'some-files={}' >> $GITHUB_OUTPUT ';'
+        run: find dist/assets/*.js -type f -execdir echo 'some-files={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifacts
       # https://github.com/actions/upload-artifact
         uses: actions/upload-artifact@v4
