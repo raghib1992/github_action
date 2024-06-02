@@ -52,7 +52,7 @@ jobs:
         run: echo "deploying....."
 ```
 # Nodejs app workflow with multiple job run in sequential
-```
+```yml
 name: Deploy Project
 on: push
 jobs:

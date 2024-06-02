@@ -6,7 +6,7 @@
 2. Jobs
 - Jobs that's contain one or more steps
 - Define runner (execution environment)
-- Run in parallel (default) or aequential
+- Run in parallel (default) or sequential
 - Can be condition
 3. Steps
 - Execute a shell script or an action
