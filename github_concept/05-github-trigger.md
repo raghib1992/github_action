@@ -1,7 +1,8 @@
 # Events (Workflow trigger)
 ![alt text](image-1.png)
 
-# Cheat sheet link: *https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet*
+# Cheat sheet link: 
+*https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet*
 
 ## Workflow
 ```yml
@@ -43,7 +44,7 @@ jobs:
         run: echo "Deploying..."
 ```
 
-## TO skip tigger when you push code, add [skip ci] in commit message
+## To skip tigger when you push code, add [skip ci] in commit message
 ```
 git commit -m "Add comment [skip ci]"
 ```
