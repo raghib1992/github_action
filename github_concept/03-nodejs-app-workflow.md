@@ -1,23 +1,24 @@
 # NodeJs app run locally in laptop
 ### Step 1: Download node js app locally
 ### Step 2: cd in to nodejs app folder
-```
-cd second-action-react-demo
+```sh
+cd 03-second-action-react-demo
 ```
 ### Step 3: Install npm
-```
+```sh
 npm install
 ```
 ### Step 3: Run app
-```
+```sh
 npm run dev
 ```
 ### Step 5: Verify in browser
-```
-http://localhost:5173
+```sh
+curl http://localhost:5173
 ```
 
-# Nodejs app workflow with multiple job run in parallel
+# Multiple Job
+### Parallel
 ```yml
 name: Deploy Project
 on: push
@@ -51,10 +52,11 @@ jobs:
       - name: Deploy
         run: echo "deploying....."
 ```
-# Nodejs app workflow with multiple job run in sequential
+
+### Workflow with multiple job run in sequential with multiple trigger
 ```yml
 name: Deploy Project
-on: push
+on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -70,7 +72,7 @@ jobs:
       - name: Run test
         run: npm test
   deploy:
-    need: test
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Get-code
@@ -86,10 +88,11 @@ jobs:
       - name: Deploy
         run: echo "deploying....."
 ```
-# Nodejs app workflow with multiple job run in sequential with multple trigger
-```
+
+### Workflow with multiple triggers
+```yml
 name: Deploy Project
-on: [push,workflow_dispatch]
+on: [push, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -104,20 +107,4 @@ jobs:
         run: npm ci
       - name: Run test
         run: npm test
-  deploy:
-    need: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get-code
-        uses: actions/checkout@v3
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - name: Install dependencies
-        run: npm ci
-      - name: Build Project
-        run: npm run build
-      - name: Deploy
-        run: echo "deploying....."
 ```

@@ -4,6 +4,12 @@
 # Cheat sheet link: 
 *https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet*
 
+
+![alt text](image-2.png)
+
+
+### Ref link for github activity types doc *https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request*
+
 ## Workflow
 ```yml
 name: Events Demo 1
@@ -16,6 +22,9 @@ on:
       - master
       - 'dev-*' # dev-new dev-this-is-new
       - 'feat/**' # feat/new feat/boat/new
+     path:
+      - '.github/workflows/*'
+      # this events only work for changes done in path mention and not for other path 
   workflow_dispatch:
   push:
     branches:
@@ -25,7 +34,7 @@ on:
       - 'feat/**'
     path-ignore:
       - '.github/workflows/*'
-      
+     # this path ignore means above mention branch will trigeer the events for nay changes except changes done in path-ignore  
 jobs:
   deploy:
     runs-on: ubuntu-latest

@@ -4,11 +4,13 @@
 
 ```yml
 name: Output Information
-on: worflow_dispatch
+on: [push,worflow_dispatch]
 jobs:
   info:
     runs-on: ubuntu-latest
     steps:
       - name: Output Github Context
         run: echo "${{ toJSON(github) }}"
+        # github is metadata and to make it readable use toJSON
+        # ${{ }}, this is a function used to make github to not read as plain text
 ```

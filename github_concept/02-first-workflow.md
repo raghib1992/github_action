@@ -4,9 +4,12 @@
 - gh-first-action/.github/workflows/first-action.yml
 ```yml
 name: First Workflow
+# This workflow_dispatch used for manual trigger
 on: workflow_dispatch
 jobs:
   first-job:
+    # Get the list of hosted runner 
+    # https://docs.github.com/en/actions/using-github-hosted-runners/about-github-hosted-runners/about-github-hosted-runners
     runs-on: ubuntu-latest
     steps:
       - name: Print greeitng
