@@ -10,6 +10,3 @@ jobs:
       - name: Output Github Context
         # https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/evaluate-expressions-in-workflows-and-actions
         run: echo ${{ toJSON(github) }}
-
-      - name: print goodbye
-        run: echo "Good Bye"
