@@ -15,3 +15,6 @@ jobs:
       - name: Install dependencies
         uses: npm ci
         working-directory: './02_nodejs_project'
+      - name: Run Test
+        uses: npm test
+        working-directory: './02_nodejs_project'
