@@ -1,4 +1,4 @@
-name: First Workflow
+name: Github Metadata
 
 on: workflow_dispatch
 
