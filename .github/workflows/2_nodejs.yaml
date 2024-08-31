@@ -1,0 +1,17 @@
+name: NodeJSProject
+on: push #https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows, https://github.com/marketplace/actions/checkout
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get Code
+        uses: actions/checkout@v4
+      # List of preinstalled software
+      # https://github.com/actions/runner-images/blob/main/images/ubuntu/Ubuntu2204-Readme.md
+      - name: setup nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        uses: npm ci
+        working-directory: './02_nodejs_project'
