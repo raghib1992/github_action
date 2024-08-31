@@ -1,4 +1,4 @@
-name: Shell Commands
+name: First Workflow
 
 on: workflow_dispatch
 
