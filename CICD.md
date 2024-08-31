@@ -4,7 +4,6 @@ List of Branches:
 3. feature1 (developer work on this to add new code)
 
 Workflow
-
 1. feature1 --> pull request --> workflow --> Approval --> developer
     - Install dependencies
     - check code formatting
