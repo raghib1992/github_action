@@ -1,5 +1,5 @@
 name: NodeJS Deploy
-on: push #https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows, https://github.com/marketplace/actions/checkout
+on: workflow_dispatch #https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows, https://github.com/marketplace/actions/checkout
 jobs:
   test:
     runs-on: ubuntu-latest
