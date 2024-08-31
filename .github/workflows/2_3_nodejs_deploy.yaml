@@ -1,5 +1,8 @@
 name: NodeJS Sequential Deploy
-on: push
+# Multiple events to trigger workflow
+on: 
+  - push
+  - workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
