@@ -13,19 +13,19 @@ jobs:
         uses: actions/checkout@v4
       - name: Install dependencies
         run: npm ci
-        working-directory: './02_nodejs_project'
+        working-directory: './03_nodejs_project'
       - name: Lint Code
         run: npm run lint
-        working-directory: './02_nodejs_project'
+        working-directory: './03_nodejs_project'
       - name: Run test
         run: npm run test
-        working-directory: './02_nodejs_project'
+        working-directory: './03_nodejs_project'
   build:
     needs: test
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: './02_nodejs_project'
+        working-directory: './03_nodejs_project'
     steps:
       - name: Get-code
         uses: actions/checkout@v4
