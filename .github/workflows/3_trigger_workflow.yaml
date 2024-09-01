@@ -1,4 +1,4 @@
-name: trigger Workflow with Events Filter
+name: Trigger Workflow with Events Filter
 
 on:
   workflow_dispatch:
