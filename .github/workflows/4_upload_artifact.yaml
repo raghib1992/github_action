@@ -39,7 +39,7 @@ jobs:
         with:
           name: dist-files # name of files to retrieve in other Job
           path: | ## Path where artifact will saved
-            dist
+            03_nodejs_project/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
