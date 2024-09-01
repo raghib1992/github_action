@@ -7,8 +7,8 @@ on: # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-wo
       - 'feature/*' # match feature/featA doesn't match feature/feat/A
       - 'feature/**' # match feature/feat/B
       - '!bugs/buga'
-    branches-ignore:
-      - master
+    # branches-ignore:
+    #   - master
     tags:
       - v1.*
     paths:
