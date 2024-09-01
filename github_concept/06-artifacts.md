@@ -46,10 +46,23 @@ jobs:
     steps:
       - name: Deploy
         run: echo "deploying....."
-      # - name: Downlaod Artifacts
-      #   uses: actions/download-artifact@v4
-      #   with:
-      #     name: dist-file
-      # - name: Output Content
-      #   run: ls -l
+      - name: Downlaod Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist-file
+      - name: Output Content
+        run: ls -l
+```
+
+### Download artifact
+- manually
+![alt text](image-4.png)
+- In workflow 
+```yaml
+# use action
+- name: Downlaod Artifacts
+  uses: actions/download-artifact@v4
+  with:
+    # name refer to name from upload artifacts from previous job
+    name: dist-file
 ```
