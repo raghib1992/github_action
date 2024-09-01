@@ -1,12 +1,13 @@
 name: second workflow
 
 on:
+  workflow_dispatch:
   push:
-    # branches:
-    #   - master
-    #   - 'feature/*' # match feature/featA doesn't match feature/feat/A
-    #   - 'feature/**' # match feature/feat/B
-    #   - '!bugs/buga'
+    branches:
+      - master
+      - 'feature/*' # match feature/featA doesn't match feature/feat/A
+      - 'feature/**' # match feature/feat/B
+      - '!bugs/buga'
     branches-ignore:
       - master
     tags:
