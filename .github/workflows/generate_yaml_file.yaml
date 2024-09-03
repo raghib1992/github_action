@@ -72,7 +72,7 @@ jobs:
           mkdir -p yaml/${{ inputs.clusterName }}
       
       - name: Generate Milvus Manifest
-        run: python generate_milvus_manifest.py
+        run: python generate_yaml_manifest.py
         env:
           NAMESPACE: ${{ inputs.namespace }}
           CLUSTER: ${{ inputs.clusterName }}
@@ -88,12 +88,12 @@ jobs:
           git config --global user.name "raghib1992"
           git remote set-url --push origin https://raghib1992:$GITHUB_TOKEN@github.com/raghib1992/github_action
           git checkout -b ${{ env.BRANCH_NAME }}
-          git add milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml
+          git add yaml/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml
           git commit -m "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml"
           git push --set-upstream origin ${{ env.BRANCH_NAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH_NAME: "milvus-${{ inputs.clusterName }}-${{ inputs.namespace }}"
+          BRANCH_NAME: "yaml-${{ inputs.clusterName }}-${{ inputs.namespace }}"
 
       - name: Raise-PR
         id: raise-pr
