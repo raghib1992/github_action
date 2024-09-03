@@ -101,4 +101,14 @@ jobs:
           gh pr create --title "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --body "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --base master --repo https://github.com/raghib1992/github_action
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  MergerPR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: changed_files
+        id: changed_files
+        run: |
+          PR_NUMBER=`echo $GITHUB_REF | cut -d/ -f3`
+          echo $PR_NUMBER
           
