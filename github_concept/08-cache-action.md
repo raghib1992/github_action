@@ -1,5 +1,5 @@
 # Caching stage
-![alt text](image.png)
+![alt text](image-6.png)
 
 # Link for caching dependencies doc
 *https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows*
