@@ -98,7 +98,7 @@ jobs:
       - name: Raise-PR
         id: raise-pr
         run: |
-          gh pr create --title "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --body "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --base main --repo https://github.com/raghib1992/github_action
+          gh pr create --title "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --body "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --base master --repo https://github.com/raghib1992/github_action
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           
