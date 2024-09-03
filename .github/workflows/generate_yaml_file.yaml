@@ -113,4 +113,6 @@ jobs:
           echo $PR_NUMBER
           list_of_folders=`gh pr view https://github.com/raghib1992/github_action/$PR_NUMBER --json files --jq '[.files[].path]'`
           echo $list_of_folders
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           
