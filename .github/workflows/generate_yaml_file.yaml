@@ -37,29 +37,11 @@ on:
         default: 'az-eu-azimuth-kfp-dev'
 
 jobs:
-  generate-yaml-file:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
         uses: actions/checkout@v4
-
-      # - name: Install wget
-      #   run: |
-      #     sudo apt-get update -y
-      #     sudo apt-get install wget jq -y
-
-      # - name: Install GH Cli
-      #   id: github-cli
-      #   run: |
-      #     mkdir -p .bin
-      #     wget -q https://repo.azaibench.com/deploy/github/gh -O .bin/gh
-      #     chmod +x .bin/gh
-      #     echo "$GITHUB_WORKSPACE/.bin" >> $GITHUB_PATH
-
-      # - name: Setup Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.10'
 
       - name: Install Python Packages
         run: |
@@ -71,6 +53,11 @@ jobs:
         run: |
           mkdir -p yaml/${{ inputs.clusterName }}
       
+      - name: Change File
+        id: ch_file
+        run: |
+          PR_NUMBER=`gh pr list --search "Adding milvus manifest file" --json number,title --jq '.[] | select(.title | contains("Adding milvus manifest file")) | .number'`
+          
       - name: Generate Milvus Manifest
         run: python generate_yaml_manifest.py
         env:
@@ -101,4 +88,21 @@ jobs:
           gh pr create --title "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --body "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --base master --repo https://github.com/raghib1992/github_action
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  MergerPR:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: changed_files
+        id: changed_files
+        run: |
+          git pull
+          git checkout ${{ env.BRANCH_NAME }}
+          PR_NUMBER=`echo $GITHUB_REF | cut -d/ -f3`
+          echo $PR_NUMBER
+          list_of_folders=`gh pr view https://github.com/raghib1992/github_action/pull/$PR_NUMBER --json files --jq '[.files[].path]'`
+          echo $list_of_folders
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          BRANCH_NAME: "yaml-${{ inputs.clusterName }}-${{ inputs.namespace }}"
           
