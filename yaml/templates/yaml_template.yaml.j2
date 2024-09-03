@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: milvus-{{ SORT_NAMESPACE }}
+  namespace: {{ namespace }}
+spec:
+    containers:
+        image: nginx:{{ MILVUS_IMAGE_VERSION }}

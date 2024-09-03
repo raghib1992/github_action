@@ -18,8 +18,8 @@ if CLUSTER == 'dev':
 else:
     SORT_CLUSTER = CLUSTER
 
-env = Environment(loader=FileSystemLoader("../templates"))
-templates = env.get_template("milvus_template.yaml.j2")
+env = Environment(loader=FileSystemLoader("./templates"))
+templates = env.get_template("yaml_template.yaml.j2")
 content = templates.render(
     cluster = CLUSTER,  
     namespace = NAMESPACE,
@@ -30,7 +30,7 @@ content = templates.render(
     sort_cluster = SORT_CLUSTER
 )
 
-filename = f"../yaml/{CLUSTER}/{NAMESPACE}.yaml"
+filename = f"./{CLUSTER}/{NAMESPACE}.yaml"
 
 with open(filename,'w') as f:
     f.write(content)
