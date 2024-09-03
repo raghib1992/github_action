@@ -113,7 +113,7 @@ jobs:
           git checkout ${{ env.BRANCH_NAME }}
           PR_NUMBER=`git branch --show-current`
           echo $PR_NUMBER
-          list_of_folders=`gh pr view https://github.com/raghib1992/github_action/$PR_NUMBER --json files --jq '[.files[].path]'`
+          list_of_folders=`gh pr view https://github.com/raghib1992/github_action/pull/$PR_NUMBER --json files --jq '[.files[].path]'`
           echo $list_of_folders
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
