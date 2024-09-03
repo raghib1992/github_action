@@ -1,0 +1,104 @@
+name: Generate Yaml File
+
+on:
+  workflow_dispatch:
+    inputs:
+      clusterName:
+        type: choice
+        required: true
+        description: Select Cluster
+        default: 'dev' 
+        options: 
+        - bronze
+        - dev
+        - iron
+        - jade
+        - lead
+        - mirror
+        - onyx
+      namespace:
+        description: Namespace in which milvus cluster required
+        type: string
+        required: true
+      milusImageVersion:
+        description: Milvus Image version
+        type: string
+        required: true
+        default: 'v2.4.9'
+      attuImageVersion:
+        description: Attu Image version
+        type: string
+        required: true
+        default: 'v2.4.7'
+      bucketName:
+        description: Namespace in which milvus cluster required
+        type: string
+        required: true
+        default: 'az-eu-azimuth-kfp-dev'
+
+jobs:
+  generate-yaml-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+
+      - name: Install wget
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install wget jq -y
+
+      - name: Install GH Cli
+        id: github-cli
+        run: |
+          mkdir -p .bin
+          wget -q https://repo.azaibench.com/deploy/github/gh -O .bin/gh
+          chmod +x .bin/gh
+          echo "$GITHUB_WORKSPACE/.bin" >> $GITHUB_PATH
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python Packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install jinja2
+      
+      - name: Create directory if not exist
+        id: create-cluster-directory
+        run: |
+          mkdir -p yaml/${{ inputs.clusterName }}
+      
+      - name: Generate Milvus Manifest
+        run: python generate_milvus_manifest.py
+        env:
+          NAMESPACE: ${{ inputs.namespace }}
+          CLUSTER: ${{ inputs.clusterName }}
+          MILVUS_IMAGE_VERSION: ${{ inputs.milusImageVersion }}
+          BUCKET_NAME: ${{ inputs.bucketName }}
+          ATTU_IMAGE_VERSION: ${{ inputs.attuImageVersion }}
+        working-directory: ./yaml
+
+      - name: Git push changes to branch
+        id: branch
+        run: |
+          git config --global user.email "raghib.npti@gmail.com"
+          git config --global user.name "raghib1992"
+          git remote set-url --push origin https://raghib1992:$GITHUB_TOKEN@github.com/raghib1992/github_action
+          git checkout -b ${{ env.BRANCH_NAME }}
+          git add milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml
+          git commit -m "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml"
+          git push --set-upstream origin ${{ env.BRANCH_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH_NAME: "milvus-${{ inputs.clusterName }}-${{ inputs.namespace }}"
+
+      - name: Raise-PR
+        id: raise-pr
+        run: |
+          gh pr create --title "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --body "Adding milvus manifest file: milvus/${{ inputs.clusterName }}/${{ inputs.namespace }}.yaml" --base main --repo https://github.com/AZU-IGNITE/azimuth-profiles
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          

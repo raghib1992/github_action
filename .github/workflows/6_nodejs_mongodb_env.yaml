@@ -1,6 +1,6 @@
 name: Using Env In Workflow
 on:
-  # push:
+  #- push:
   #   branches:
   #     - main
   #     - dev
