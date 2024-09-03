@@ -43,23 +43,23 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v4
 
-      - name: Install wget
-        run: |
-          sudo apt-get update -y
-          sudo apt-get install wget jq -y
+      # - name: Install wget
+      #   run: |
+      #     sudo apt-get update -y
+      #     sudo apt-get install wget jq -y
 
-      - name: Install GH Cli
-        id: github-cli
-        run: |
-          mkdir -p .bin
-          wget -q https://repo.azaibench.com/deploy/github/gh -O .bin/gh
-          chmod +x .bin/gh
-          echo "$GITHUB_WORKSPACE/.bin" >> $GITHUB_PATH
+      # - name: Install GH Cli
+      #   id: github-cli
+      #   run: |
+      #     mkdir -p .bin
+      #     wget -q https://repo.azaibench.com/deploy/github/gh -O .bin/gh
+      #     chmod +x .bin/gh
+      #     echo "$GITHUB_WORKSPACE/.bin" >> $GITHUB_PATH
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
+      # - name: Setup Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10'
 
       - name: Install Python Packages
         run: |
